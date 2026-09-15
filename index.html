@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Madrid Weekend — Pocket Navigator</title>
+<title>Madrid Weekend — Geo-Optimized Pocket Navigator</title>
 <style>
   :root {
     --bg: #f7f4ef;
@@ -12,8 +12,7 @@
     --muted: #6e675f;
     --accent: #8b4d6b;
     --accent2: #2a6b52;
-    --highlight: #d97706;
-    --line: #e5dec;
+    --line: #e5decf;
     --pill-bg: #efe8df;
   }
   * { box-sizing: border-box; }
@@ -26,14 +25,13 @@
     padding-bottom: 40px;
   }
   header {
-    padding: 24px 16px 16px;
+    padding: 20px 16px 14px;
     background: linear-gradient(135deg, #f0e2d5, #f7f4ef 60%, #e2eee6);
     border-bottom: 1px solid var(--line);
   }
-  h1 { margin: 0 0 6px; font-size: 1.75rem; letter-spacing: -.03em; }
-  header p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+  h1 { margin: 0 0 4px; font-size: 1.6rem; letter-spacing: -.03em; }
+  header p { margin: 0; color: var(--muted); font-size: 0.85rem; }
   
-  /* Sticky Controls Bar */
   .controls {
     position: sticky;
     top: 0;
@@ -43,11 +41,7 @@
     border-bottom: 1px solid var(--line);
     padding: 10px 16px;
   }
-  .switch-wrapper {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 8px;
-  }
+  .switch-wrapper { display: flex; gap: 6px; margin-bottom: 8px; }
   .plan-btn {
     flex: 1;
     border: 1px solid #dcd4c8;
@@ -57,22 +51,11 @@
     border-radius: 12px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
-  .plan-btn.active {
-    background: var(--ink);
-    color: white;
-    border-color: var(--ink);
-  }
+  .plan-btn.active { background: var(--ink); color: white; border-color: var(--ink); }
   
-  /* Priority Filter Tags */
-  .filter-bar {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-  }
+  .filter-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
   .filter-bar::-webkit-scrollbar { display: none; }
   .filter-tag {
     border: 1px solid #d6ceb8;
@@ -85,30 +68,19 @@
     white-space: nowrap;
     cursor: pointer;
   }
-  .filter-tag.active {
-    background: var(--accent2);
-    color: white;
-    border-color: var(--accent2);
-  }
+  .filter-tag.active { background: var(--accent2); color: white; border-color: var(--accent2); }
 
   main { max-width: 760px; margin: auto; padding: 16px; }
 
-  /* GPS Widget */
   .gps-card {
     background: #111827;
     color: #f9fafb;
     border-radius: 16px;
     padding: 14px 16px;
-    margin-bottom: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
   }
-  .gps-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .gps-title { font-weight: 700; font-size: 0.9rem; color: #f3f4f6; }
+  .gps-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .gps-title { font-weight: 700; font-size: 0.88rem; }
   .gps-btn {
     background: #2563eb;
     color: white;
@@ -119,31 +91,19 @@
     font-weight: 600;
     cursor: pointer;
   }
-  .gps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 8px;
-    font-size: 0.78rem;
-  }
-  .gps-item {
-    background: rgba(255,255,255,0.08);
-    padding: 8px 10px;
-    border-radius: 8px;
-  }
+  .gps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; font-size: 0.78rem; }
+  .gps-item { background: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 8px; }
   .gps-item span { display: block; color: #9ca3af; font-size: 0.7rem; }
 
-  /* Summary Card */
   .summary-card {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 16px;
     padding: 14px 16px;
-    margin-bottom: 18px;
-    font-size: 0.85rem;
+    margin-bottom: 16px;
+    font-size: 0.82rem;
   }
-  .summary-card strong { color: var(--accent); }
 
-  /* Day Section */
   .day {
     background: var(--card);
     border: 1px solid var(--line);
@@ -151,79 +111,35 @@
     padding: 16px;
     margin-bottom: 18px;
   }
-  .day h2 {
-    margin: 0 0 12px;
-    font-size: 1.15rem;
-    color: var(--ink);
-    border-bottom: 2px solid var(--bg);
-    padding-bottom: 8px;
-  }
+  .day h2 { margin: 0 0 12px; font-size: 1.1rem; border-bottom: 2px solid var(--bg); padding-bottom: 8px; }
 
-  /* Items */
-  .item {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 12px;
-    padding: 12px 0;
-    border-top: 1px solid var(--line);
-    transition: opacity 0.2s;
-  }
+  .item { display: grid; grid-template-columns: 55px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
   .item:first-of-type { border-top: none; }
-  .time {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 0.85rem;
-  }
-  .item-content strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
-  .item-content p { margin: 0 0 6px; color: var(--muted); font-size: 0.85rem; }
+  .time { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+  .item-content strong { display: block; font-size: 0.92rem; margin-bottom: 2px; }
+  .item-content p { margin: 0 0 6px; color: var(--muted); font-size: 0.82rem; }
 
-  /* Tags & Links */
-  .item-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
-  .mini-tag {
-    font-size: 0.68rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: #f0f0f0;
-    color: #444;
-    font-weight: 600;
-  }
+  .item-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+  .mini-tag { font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; background: #f0f0f0; color: #444; font-weight: 600; }
   .mini-tag.vegan { background: #dcfce7; color: #15803d; }
   .mini-tag.gay { background: #fce7f3; color: #be185d; }
   .mini-tag.hotel { background: #e0f2fe; color: #0369a1; }
   .mini-tag.flight { background: #fef3c7; color: #b45309; }
   .mini-tag.concert { background: #f3e8ff; color: #6b21a8; }
+  .mini-tag.geo { background: #e0e7ff; color: #3730a3; }
 
-  .map-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.78rem;
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: 4px;
-  }
-  .map-link:hover { text-decoration: underline; }
-
-  .choice-box {
-    border: 1px dashed #cbbdaf;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 8px;
-    background: #faf8f5;
-    font-size: 0.82rem;
-  }
+  .map-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: #2563eb; text-decoration: none; font-weight: 600; }
+  .choice-box { border: 1px dashed #cbbdaf; border-radius: 10px; padding: 10px; margin-top: 6px; background: #faf8f5; font-size: 0.82rem; }
 
   .hidden { display: none !important; }
-  
   footer { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 20px; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Madrid Navigator 🇪🇸</h1>
-  <p>Real-time options, dietary checks & distance helper.</p>
+  <h1>Madrid Pocket Navigator 🇪🇸</h1>
+  <p>Geo-grouped itinerary designed to minimize travel time.</p>
 </header>
 
 <div class="controls">
@@ -242,56 +158,41 @@
 
 <main>
 
-  <!-- Live Location & Distance Widget -->
   <section class="gps-card">
     <div class="gps-header">
-      <div class="gps-title">📍 Live Pocket Distance Calculator</div>
+      <div class="gps-title">📍 Live Distance Calculator</div>
       <button class="gps-btn" onclick="calculateDistances()">Get My Location</button>
     </div>
     <div class="gps-grid">
-      <div class="gps-item">
-        <span>The 143 Hotel</span>
-        <strong id="dist-h1">-- km</strong>
-      </div>
-      <div class="gps-item">
-        <span>Canopy Castellana</span>
-        <strong id="dist-h2">-- km</strong>
-      </div>
-      <div class="gps-item">
-        <span>Shakira Concert</span>
-        <strong id="dist-concert">-- km</strong>
-      </div>
-      <div class="gps-item">
-        <span>Chueca Center</span>
-        <strong id="dist-chueca">-- km</strong>
-      </div>
+      <div class="gps-item"><span>The 143 (Hotel 1)</span><strong id="dist-h1">-- km</strong></div>
+      <div class="gps-item"><span>Canopy Hilton (Hotel 2)</span><strong id="dist-h2">-- km</strong></div>
+      <div class="gps-item"><span>Iberdrola Music</span><strong id="dist-concert">-- km</strong></div>
+      <div class="gps-item"><span>Chueca Center</span><strong id="dist-chueca">-- km</strong></div>
     </div>
   </section>
 
-  <!-- Logistics Banner -->
   <section class="summary-card">
-    <strong>✈️ Key Trip Logistics:</strong>
-    <ul style="margin: 6px 0 0; padding-left: 18px; line-height: 1.5;">
-      <li><b>Flight Out:</b> Fri 18 Sep • DUB 08:00 → MAD 11:30 (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
-      <li><b>Flight Home:</b> Mon 21 Sep • MAD 19:25 → DUB (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
-      <li><b>Hotel 1 (Fri):</b> The 143 (Avenida de Abrantes 143) • Check-in 14:00</li>
-      <li><b>Hotel 2 (Sat-Mon):</b> Canopy by Hilton Castellana • 2 Nights</li>
+    <strong>✈️ Flight & Hotel Specs:</strong>
+    <ul style="margin: 4px 0 0; padding-left: 18px; line-height: 1.4;">
+      <li><b>Out:</b> Fri 18 Sep • DUB 08:00 → MAD 11:30 (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
+      <li><b>Back:</b> Mon 21 Sep • MAD 19:25 → DUB (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
+      <li><b>Hotel 1 (Fri):</b> The 143 (Carabanchel / Abrantes)</li>
+      <li><b>Hotel 2 (Sat-Mon):</b> Canopy Hilton Castellana</li>
     </ul>
   </section>
 
-  <!-- ITINERARY CONTAINER -->
   <div id="itinerary">
 
-    <!-- FRIDAY -->
+    <!-- FRIDAY: SOUTH ZONE ONLY -->
     <section class="day">
-      <h2>Friday 18 Sep · Arrival, Check-In & Shakira</h2>
+      <h2>Friday 18 Sep · South Zone (Hotel 1, Madrid Río & Shakira)</h2>
       
       <div class="item" data-tags="logistics flight">
         <div class="time">11:30</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag flight">Flight</span></span>
           <strong>Landing at Madrid Barajas (MAD)</strong>
-          <p>Collect bags and head toward town via Taxi or Metro line 8.</p>
+          <p>Grab luggage and take Taxi/Metro Line 8 straight to south Madrid.</p>
           <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adolfo+Su%C3%A1rez+Madrid%E2%80%93Barajas+Airport">📍 Map Airport</a>
         </div>
       </div>
@@ -299,64 +200,54 @@
       <div class="item" data-tags="logistics hotel">
         <div class="time">12:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag hotel">Hotel 1</span></span>
-          <strong>Check-in / Drop Bags @ The 143</strong>
-          <p>Avenida de Abrantes, 143. Check-in official window from 14:00.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Avenida+de+Abrantes+143+Madrid">📍 Open in Maps</a>
+          <span class="item-tags"><span class="mini-tag hotel">Hotel 1</span><span class="mini-tag geo">South</span></span>
+          <strong>Drop Bags @ The 143</strong>
+          <p>Avenida de Abrantes 143. Drop bags before heading to nearby lunch.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Avenida+de+Abrantes+143+Madrid">📍 Open Hotel Map</a>
         </div>
       </div>
 
       <div class="item" data-tags="vegan food">
         <div class="time">13:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag vegan">Vegan</span></span>
-          <strong>Lunch · Santa y Pura (Lavapiés)</strong>
-          <p>100% plant-based tapas and cozy atmosphere to kick off the trip.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Santa+y+Pura+Calle+Santa+Isabel+Madrid">📍 Directions to Santa y Pura</a>
+          <span class="item-tags"><span class="mini-tag vegan">100% Vegan</span><span class="mini-tag geo">Near Hotel</span></span>
+          <strong>Lunch · Doxa Plant Based or Bite Me Café</strong>
+          <p>Stay local to Abrantes/Usera. Doxa offers 100% vegan meals in Carabanchel, or grab savory bagels at Bite Me near Matadero.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Doxa+Plant+Based+Calle+del+Marqu%C3%A9s+de+Jura+Real+22+Madrid">📍 Map Doxa (Near Hotel)</a>
         </div>
       </div>
 
       <div class="item" data-tags="wine food">
         <div class="time">16:00</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Market</span></span>
-          <strong>Mercado de San Fernando & Embajadores</strong>
-          <p>Browse local produce, natural wine stalls, and eclectic neighborhood vibes.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mercado+de+San+Fernando+Madrid">📍 Open Market Location</a>
-        </div>
-      </div>
-
-      <div class="item" data-tags="wine">
-        <div class="time">17:00</div>
-        <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Wine</span></span>
-          <strong>Wine Stop · Madrid & Darracott or Delito</strong>
-          <p>Sample regional Spanish wines before getting ready for the concert.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Madrid+and+Darracott+Madrid">📍 Open Maps</a>
+          <span class="item-tags"><span class="mini-tag">Culture</span><span class="mini-tag geo">South</span></span>
+          <strong>Matadero Madrid & Mercado de San Fernando</strong>
+          <p>Stroll the Madrid Río riverside cultural complex without hitting heavy city center traffic.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Matadero+Madrid">📍 Map Matadero</a>
         </div>
       </div>
 
       <div class="item" data-tags="concert logistics">
         <div class="time">20:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag concert">Concert</span></span>
+          <span class="item-tags"><span class="mini-tag concert">Concert</span><span class="mini-tag geo">South Hub</span></span>
           <strong>💃 SHAKIRA Live @ Iberdrola Music</strong>
-          <p>Estadio Shakira (Iberdrola Music). Arrive early for security checks!</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Iberdrola+Music+Villaverde+Madrid">📍 Directions to Iberdrola Music</a>
+          <p>Direct ~15 min trip straight down from Abrantes to Villaverde gates.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Iberdrola+Music+Villaverde+Madrid">📍 Map Iberdrola Music</a>
         </div>
       </div>
     </section>
 
-    <!-- SATURDAY -->
+    <!-- SATURDAY: CENTRAL / NORTH ZONE -->
     <section class="day">
-      <h2>Saturday 19 Sep · Hotel Switch + Chueca & Malasaña</h2>
+      <h2>Saturday 19 Sep · Hotel Switch + Malasaña, Chueca & Debod</h2>
 
       <div class="item" data-tags="logistics hotel">
         <div class="time">09:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag hotel">Hotel 2</span></span>
-          <strong>Switch to Canopy by Hilton Madrid Castellana</strong>
-          <p>Move luggage to Hotel 2 (Paseo de la Castellana area).</p>
+          <span class="item-tags"><span class="mini-tag hotel">Hotel 2</span><span class="mini-tag geo">Castellana</span></span>
+          <strong>Move Bags → Canopy by Hilton Castellana</strong>
+          <p>Check into Hotel 2. You are now anchored in the central/north zone.</p>
           <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Canopy+by+Hilton+Madrid+Castellana">📍 Canopy Hilton Map</a>
         </div>
       </div>
@@ -364,20 +255,20 @@
       <div class="item" data-tags="gay food">
         <div class="time">10:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Explore</span></span>
-          <strong>Malasaña Breakfast & Vintage Browsing</strong>
-          <p>Plaza del Dos de Mayo, Calle Velarde, and independent thrift shops.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Plaza+del+Dos+de+Mayo+Madrid">📍 Malasaña Center</a>
+          <span class="item-tags"><span class="mini-tag">Shops</span><span class="mini-tag geo">Central</span></span>
+          <strong>Malasaña Bargains & Vintage</strong>
+          <p>Plaza del Dos de Mayo, Calle Velarde, and independent vintage shops.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Plaza+del+Dos+de+Mayo+Madrid">📍 Malasaña Map</a>
         </div>
       </div>
 
       <div class="item plan-opt-two" data-tags="gay vegan food">
         <div class="time">13:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag gay">Queer Hub</span><span class="mini-tag vegan">Vegan-Friendly</span></span>
-          <strong>Lunch · Chueca (Mixed / Plant-based)</strong>
-          <p><b>Option 2 Pick:</b> LaLina Chueca or Mad Mad Vegan. Great options for both vegan & non-vegan menu items.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chueca+Madrid+Restaurants">📍 Explore Chueca Dining</a>
+          <span class="item-tags"><span class="mini-tag gay">Queer Hub</span><span class="mini-tag vegan">Adjacent</span></span>
+          <strong>Lunch · Chueca (LaLina / Mad Mad Vegan)</strong>
+          <p>Walk directly from Malasaña across Fuencarral into Chueca for lunch.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chueca+Madrid+Restaurants">📍 Chueca Dining Map</a>
         </div>
       </div>
 
@@ -385,28 +276,28 @@
         <div class="time">13:30</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag vegan">100% Vegan</span></span>
-          <strong>Lunch · Mad Mad Vegan</strong>
-          <p><b>Option 1 Pick:</b> Dependable full-vegan indulgent burgers and sides.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mad+Mad+Vegan+Pelayo+Madrid">📍 Directions to Mad Mad Vegan</a>
+          <strong>Lunch · Mad Mad Vegan (Pelayo)</strong>
+          <p>100% plant-based comfort burgers right in central Chueca.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mad+Mad+Vegan+Pelayo+Madrid">📍 Map Mad Mad Vegan</a>
         </div>
       </div>
 
       <div class="item plan-opt-two" data-tags="gay wine">
         <div class="time">15:00</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag gay">Gay District</span></span>
-          <strong>🌈 Walk Chueca → Salesas & Wine Bar</strong>
-          <p>Walk Calle Pelayo, Gravina, and stop for natural wine at Baco y Beto.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Baco+y+Beto+Madrid">📍 Directions to Baco y Beto</a>
+          <span class="item-tags"><span class="mini-tag gay">Salesas</span></span>
+          <strong>🌈 Salesas Walk & Wine at Baco y Beto</strong>
+          <p>Explore boutique streets (Pelayo, Gravina) and grab natural wine nearby.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Baco+y+Beto+Madrid">📍 Baco y Beto Map</a>
         </div>
       </div>
 
       <div class="item" data-tags="wine food">
         <div class="time">19:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Sunset</span></span>
+          <span class="item-tags"><span class="mini-tag">Sunset</span><span class="mini-tag geo">West Axis</span></span>
           <strong>🌅 Sunset at Temple of Debod</strong>
-          <p>Panoramic skyline view of the city and ancient Egyptian monument.</p>
+          <p>Short stroll/metro west to the temple grounds for sunset views.</p>
           <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Temple+of+Debod+Madrid">📍 Temple of Debod Map</a>
         </div>
       </div>
@@ -416,7 +307,7 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag gay">Nightlife</span></span>
           <strong>Chueca Evening Drinks / Long Play</strong>
-          <p>Casual cocktails, people-watching around Plaza de Chueca or dance at Long Play.</p>
+          <p>Head back to Chueca for cocktails, social bars, or dancing.</p>
           <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Plaza+de+Chueca+Madrid">📍 Plaza de Chueca Map</a>
         </div>
       </div>
@@ -426,22 +317,22 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag vegan">100% Vegan</span></span>
           <strong>Dinner · VEGA Álamo</strong>
-          <p>Cozy organic, 100% plant-based dinner.</p>
+          <p>Located right next to Debod/Noviciado area for easy walking after sunset.</p>
           <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=VEGA+Alamo+Madrid">📍 VEGA Alamo Map</a>
         </div>
       </div>
     </section>
 
-    <!-- SUNDAY -->
+    <!-- SUNDAY: OLD MADRID / LA LATINA -->
     <section class="day">
-      <h2>Sunday 20 Sep · El Rastro, Markets & Fine Dining</h2>
+      <h2>Sunday 20 Sep · El Rastro, La Latina & Fine Dining</h2>
 
       <div class="item" data-tags="wine food">
         <div class="time">10:00</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Market</span></span>
-          <strong>El Rastro Flea Market & La Latina</strong>
-          <p>Bustling outdoor market for vintage treasures, art, and clothes.</p>
+          <span class="item-tags"><span class="mini-tag">Market</span><span class="mini-tag geo">Old Town</span></span>
+          <strong>El Rastro Flea Market</strong>
+          <p>Explore side streets around Ribera de Curtidores for antique finds.</p>
           <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=El+Rastro+Madrid">📍 El Rastro Location</a>
         </div>
       </div>
@@ -449,10 +340,10 @@
       <div class="item" data-tags="vegan food">
         <div class="time">13:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag vegan">Vegan</span></span>
+          <span class="item-tags"><span class="mini-tag vegan">Vegan</span><span class="mini-tag geo">Adjacent</span></span>
           <strong>Lunch · THUNDER Vegan La Latina</strong>
-          <p>Plant-based comfort food right in the heart of La Latina.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=THUNDER+Vegan+La+Latina+Madrid">📍 Directions to THUNDER</a>
+          <p>Steps away from the flea market exit in the heart of La Latina.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=THUNDER+Vegan+La+Latina+Madrid">📍 Map THUNDER</a>
         </div>
       </div>
 
@@ -462,24 +353,24 @@
           <span class="item-tags"><span class="mini-tag vegan">Egg-Free Safe</span></span>
           <strong>🌸 Special Culinary Experience</strong>
           <div class="choice-box">
-            <b>Option A · Pipilacha:</b> Intimate 16-seat flower-focused dining (Verify egg allergy upon booking).<br>
-            <b>Option B · El Invernadero:</b> High-end Michelin-star level vegetable tasting menu.
+            <b>Option A · Pipilacha:</b> Intimate 16-seat flower tasting menu.<br>
+            <b>Option B · El Invernadero:</b> Michelin-starred plant tasting menu.
           </div>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=El+Invernadero+Rodrigo+de+la+Calle+Madrid">📍 Map El Invernadero</a>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=El+Invernadero+Rodrigo+de+la+Calle+Madrid">📍 Map Fine Dining</a>
         </div>
       </div>
     </section>
 
-    <!-- MONDAY -->
+    <!-- MONDAY: HISTORIC CENTER & EXIT -->
     <section class="day">
-      <h2>Monday 21 Sep · Classic Sights & Departure</h2>
+      <h2>Monday 21 Sep · Historic Royal Hub & Departure</h2>
 
       <div class="item" data-tags="logistics">
         <div class="time">10:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Sightseeing</span></span>
+          <span class="item-tags"><span class="mini-tag">Sightseeing</span><span class="mini-tag geo">Opera Axis</span></span>
           <strong>Royal Palace of Madrid & Sabatini Gardens</strong>
-          <p>Stroll through historic grand architecture and gardens before your flight.</p>
+          <p>Stroll through the gardens and royal grounds before departure.</p>
           <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+of+Madrid">📍 Royal Palace Map</a>
         </div>
       </div>
@@ -488,9 +379,9 @@
         <div class="time">16:30</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag flight">Flight</span></span>
-          <strong>Head to Madrid Airport (MAD)</strong>
-          <p>Return Flight departs at <b>19:25</b> to Dublin (DUB).</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adolfo+Su%C3%A1rez+Madrid%E2%80%93Barajas+Airport">📍 Directions to Airport</a>
+          <strong>Direct Travel to Airport (MAD)</strong>
+          <p>Flight leaves at <b>19:25</b> back to Dublin (DUB).</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adolfo+Su%C3%A1rez+Madrid%E2%80%93Barajas+Airport">📍 Airport Map</a>
         </div>
       </div>
 
@@ -499,17 +390,14 @@
   </div>
 </main>
 
-<footer>
-  Madrid Weekend Navigator • Designed for Mobile Use
-</footer>
+<footer>Madrid Geo-Optimized Pocket Navigator</footer>
 
 <script>
-// Known Coordinates for Location Metering
 const LOCATIONS = {
-  hotel1: { lat: 40.3802, lng: -3.7281 },  // Avenida de Abrantes 143
-  hotel2: { lat: 40.4500, lng: -3.6920 },  // Canopy Castellana
-  concert: { lat: 40.3400, lng: -3.6980 }, // Iberdrola Music
-  chueca: { lat: 40.4225, lng: -3.6976 }   // Plaza de Chueca
+  hotel1: { lat: 40.3802, lng: -3.7281 },
+  hotel2: { lat: 40.4500, lng: -3.6920 },
+  concert: { lat: 40.3400, lng: -3.6980 },
+  chueca: { lat: 40.4225, lng: -3.6976 }
 };
 
 function calculateDistances() {
@@ -517,35 +405,27 @@ function calculateDistances() {
     alert("Geolocation is not supported by your browser");
     return;
   }
-
   navigator.geolocation.getCurrentPosition((position) => {
-    const userLat = position.coords.latitude;
-    const userLng = position.coords.longitude;
-
-    document.getElementById('dist-h1').innerText = getHaversineDistance(userLat, userLng, LOCATIONS.hotel1.lat, LOCATIONS.hotel1.lng) + " km";
-    document.getElementById('dist-h2').innerText = getHaversineDistance(userLat, userLng, LOCATIONS.hotel2.lat, LOCATIONS.hotel2.lng) + " km";
-    document.getElementById('dist-concert').innerText = getHaversineDistance(userLat, userLng, LOCATIONS.concert.lat, LOCATIONS.concert.lng) + " km";
-    document.getElementById('dist-chueca').innerText = getHaversineDistance(userLat, userLng, LOCATIONS.chueca.lat, LOCATIONS.chueca.lng) + " km";
-  }, () => {
-    alert("Unable to retrieve your location. Make sure GPS permissions are allowed.");
-  });
+    const uLat = position.coords.latitude;
+    const uLng = position.coords.longitude;
+    document.getElementById('dist-h1').innerText = getHaversineDistance(uLat, uLng, LOCATIONS.hotel1.lat, LOCATIONS.hotel1.lng) + " km";
+    document.getElementById('dist-h2').innerText = getHaversineDistance(uLat, uLng, LOCATIONS.hotel2.lat, LOCATIONS.hotel2.lng) + " km";
+    document.getElementById('dist-concert').innerText = getHaversineDistance(uLat, uLng, LOCATIONS.concert.lat, LOCATIONS.concert.lng) + " km";
+    document.getElementById('dist-chueca').innerText = getHaversineDistance(uLat, uLng, LOCATIONS.chueca.lat, LOCATIONS.chueca.lng) + " km";
+  }, () => { alert("Unable to access GPS location."); });
 }
 
 function getHaversineDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371; // Earth radius in KM
+  const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-            Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return (R * c).toFixed(1);
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+  return (R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))).toFixed(1);
 }
 
 function setPlan(plan) {
   const optOneItems = document.querySelectorAll('.plan-opt-one');
   const optTwoItems = document.querySelectorAll('.plan-opt-two');
-  
   if (plan === 'one') {
     optOneItems.forEach(el => el.classList.remove('hidden'));
     optTwoItems.forEach(el => el.classList.add('hidden'));
@@ -562,22 +442,15 @@ function setPlan(plan) {
 function toggleFilter(category, btnElement) {
   document.querySelectorAll('.filter-tag').forEach(el => el.classList.remove('active'));
   btnElement.classList.add('active');
-
-  const items = document.querySelectorAll('.item');
-  items.forEach(item => {
+  document.querySelectorAll('.item').forEach(item => {
     if (category === 'all') {
       item.style.display = 'grid';
     } else {
       const tags = item.getAttribute('data-tags') || '';
-      if (tags.includes(category)) {
-        item.style.display = 'grid';
-      } else {
-        item.style.display = 'none';
-      }
+      item.style.display = tags.includes(category) ? 'grid' : 'none';
     }
   });
 }
 </script>
-
 </body>
 </html>

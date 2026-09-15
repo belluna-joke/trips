@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madrid Weekend — Choose Your Vibe</title>
+<style>
+  :root { --bg:#f7f4ef; --card:#fffdf9; --ink:#24211e; --muted:#756e66; --accent:#8b4d6b; --accent2:#315c4b; --line:#e4ddd4; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; }
+  header { padding:42px 20px 28px; text-align:center; background:linear-gradient(135deg,#efe4dc,#f7f4ef 55%,#e4eee8); }
+  h1 { margin:0 0 8px; font-size:clamp(2rem,5vw,3.4rem); letter-spacing:-.04em; }
+  header p { max-width:720px; margin:0 auto; color:var(--muted); }
+  .switch { display:flex; gap:8px; justify-content:center; padding:18px; position:sticky; top:0; z-index:10; background:rgba(247,244,239,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  button { border:1px solid var(--line); background:var(--card); color:var(--ink); padding:11px 17px; border-radius:999px; cursor:pointer; font-weight:700; }
+  button.active { background:var(--ink); color:white; border-color:var(--ink); }
+  main { max-width:1000px; margin:auto; padding:28px 18px 60px; }
+  .intro { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px; }
+  .pillbox,.day { background:var(--card); border:1px solid var(--line); border-radius:22px; padding:20px; }
+  .pillbox h3 { margin-top:0; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; }
+  .tag { background:#eee8df; padding:5px 9px; border-radius:999px; font-size:.82rem; }
+  .day { margin:16px 0; }
+  .day h2 { margin:0 0 14px; font-size:1.35rem; }
+  .item { display:grid; grid-template-columns:88px 1fr; gap:16px; padding:15px 0; border-top:1px solid var(--line); }
+  .time { color:var(--accent); font-weight:800; }
+  .item strong { display:block; margin-bottom:3px; }
+  .item p { margin:0; color:var(--muted); }
+  .choice { border:1px dashed #cbbdaf; border-radius:14px; padding:12px; margin-top:9px; }
+  .choice b { color:var(--accent2); }
+  .note { margin-top:24px; padding:17px; border-radius:16px; background:#f0ebe4; }
+  .hidden { display:none; }
+  footer { text-align:center; color:var(--muted); font-size:.9rem; padding:0 20px 40px; }
+  @media(max-width:700px){ .intro{grid-template-columns:1fr}.item{grid-template-columns:72px 1fr} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Madrid, but make it <em>your</em> weekend</h1>
+  <p>Compare the original plan with the upgraded queer-friendly, mixed-food version — then use the plan that feels most like you.</p>
+</header>
+
+<div class="switch">
+  <button id="one" class="active" onclick="showPlan('one')">Option 1 · Original</button>
+  <button id="two" onclick="showPlan('two')">Option 2 · Queer-friendly</button>
+</div>
+
+<main>
+<section class="intro">
+  <div class="pillbox">
+    <h3>Your priorities</h3>
+    <div class="tags">
+      <span class="tag">🍷 Wine</span><span class="tag">🌱 Vegan options</span><span class="tag">🛍 Bargains</span>
+      <span class="tag">🍴 Food experiences</span><span class="tag">🌈 LGBTQ+ friendly</span><span class="tag">🌅 Sunsets</span>
+      <span class="tag">🪩 Alternative spaces</span><span class="tag">🥚 Egg-free options</span>
+    </div>
+  </div>
+  <div class="pillbox">
+    <h3>How to use this</h3>
+    <p style="margin:0;color:var(--muted)">Tap either version above. The core Madrid experiences stay the same; the second version shifts more time toward Chueca, Salesas and mixed restaurants with good plant-based choices.</p>
+  </div>
+</section>
+
+<div id="plan-one">
+  <section class="day"><h2>Friday · Arrival → Lavapiés → Shakira</h2>
+    <div class="item"><div class="time">12:00</div><div><strong>Arrive + drop bags</strong><p>Keep the afternoon relaxed rather than trying to conquer Madrid immediately.</p></div></div>
+    <div class="item"><div class="time">13:30</div><div><strong>Lunch · Lavapiés</strong><p>Start with a fully vegan meal at Santa y Pura, then explore Antón Martín, Lavapiés and Embajadores.</p></div></div>
+    <div class="item"><div class="time">16:00</div><div><strong>Mercado de San Fernando</strong><p>Browse stalls and local food rather than making this a huge meal.</p></div></div>
+    <div class="item"><div class="time">17:00</div><div><strong>Wine</strong><p>Choose a small wine-focused stop such as Madrid & Darracott or Delito.</p></div></div>
+    <div class="item"><div class="time">18:00</div><div><strong>Early food + concert transfer</strong><p>Eat light and leave plenty of transport time for the Shakira concert.</p></div></div>
+    <div class="item"><div class="time">20:30</div><div><strong>💃 Shakira</strong><p>Concert night. Skip the ambitious post-concert dinner and get home easily.</p></div></div>
+  </section>
+  <section class="day"><h2>Saturday · Alternative Madrid + wine + sunset</h2>
+    <div class="item"><div class="time">10:00</div><div><strong>Malasaña breakfast + wandering</strong><p>Plaza del Dos de Mayo, Calle Velarde, Calle del Pez and independent shops.</p></div></div>
+    <div class="item"><div class="time">11:30</div><div><strong>Vintage + bargains</strong><p>Make this your treasure-hunting window: vintage, books, design and second-hand finds.</p></div></div>
+    <div class="item"><div class="time">13:30</div><div><strong>Lunch · Mad Mad Vegan</strong><p>A dependable fully vegan anchor meal.</p></div></div>
+    <div class="item"><div class="time">17:00</div><div><strong>🍷 Natural wine</strong><p>Try Bravo Wine Bar or the tiny, quirky FUN FUN.</p></div></div>
+    <div class="item"><div class="time">19:30</div><div><strong>🌅 Temple of Debod</strong><p>Arrive before sunset for the Egyptian temple and Madrid skyline.</p></div></div>
+    <div class="item"><div class="time">21:00</div><div><strong>Dinner · VEGA Alamo</strong><p>Keep dinner plant-based and easy.</p></div></div>
+  </section>
+  <section class="day"><h2>Sunday · El Rastro + La Latina + special food</h2>
+    <div class="item"><div class="time">10:00</div><div><strong>El Rastro</strong><p>Go early and explore the surrounding streets for antiques, vintage and bargains.</p></div></div>
+    <div class="item"><div class="time">12:30</div><div><strong>Mercado de la Cebada</strong><p>Browse and graze rather than commit to a heavy lunch.</p></div></div>
+    <div class="item"><div class="time">14:00</div><div><strong>Lunch · THUNDER Vegan La Latina</strong><p>Choose lighter dishes rather than leaning into vegan junk food.</p></div></div>
+    <div class="item"><div class="time">15:30</div><div><strong>Siesta</strong><p>Go back to the hotel. Madrid is a late-night city — protect your energy.</p></div></div>
+    <div class="item"><div class="time">18:00</div><div><strong>🌸 Special food experience</strong><div class="choice"><b>Option A · Pipilacha</b><br>Small 16-seat flower-focused tasting experience. Ask explicitly for a completely egg-free menu.</div><div class="choice"><b>Option B · El Invernadero</b><br>High-end vegan tasting menu. The splurge option.</div></div></div>
+  </section>
+  <section class="day"><h2>Monday · Classic Madrid + last wander</h2>
+    <div class="item"><div class="time">09:30</div><div><strong>Breakfast</strong><p>Slow, easy and plant-based.</p></div></div>
+    <div class="item"><div class="time">10:30</div><div><strong>Royal Palace → Sabatini Gardens</strong><p>Give yourselves some classic Madrid after the neighbourhood-heavy weekend.</p></div></div>
+    <div class="item"><div class="time">13:30</div><div><strong>Final lunch</strong><p>Return to a favourite or try another vegan-friendly spot.</p></div></div>
+    <div class="item"><div class="time">15:00</div><div><strong>Last shopping / wandering</strong><p>Malasaña for bargains, Lavapiés for atmosphere, or Spanish wine/olive oil to take home.</p></div></div>
+  </section>
+  <div class="note"><b>Best for:</b> keeping food reliably vegan and maximising alternative neighbourhoods, markets and wine without making LGBTQ+ nightlife a major part of the trip.</div>
+</div>
+
+<div id="plan-two" class="hidden">
+  <section class="day"><h2>Friday · Arrival → Lavapiés → Shakira</h2>
+    <div class="item"><div class="time">12:00</div><div><strong>Arrive + drop bags</strong><p>Keep the first afternoon relaxed.</p></div></div>
+    <div class="item"><div class="time">13:30</div><div><strong>Lunch · Lavapiés</strong><p>Use a fully vegan anchor such as Santa y Pura, then wander Lavapiés, Antón Martín and Embajadores.</p></div></div>
+    <div class="item"><div class="time">16:00</div><div><strong>Mercado de San Fernando</strong><p>Browse and snack; this is your low-pressure food exploration.</p></div></div>
+    <div class="item"><div class="time">17:00</div><div><strong>Wine</strong><p>Pick a wine-focused stop before the concert.</p></div></div>
+    <div class="item"><div class="time">18:00</div><div><strong>Early food + concert transfer</strong><p>Eat light, confirm your egg-free choices, and allow a generous transfer buffer.</p></div></div>
+    <div class="item"><div class="time">20:30</div><div><strong>💃 Shakira</strong><p>Concert night.</p></div></div>
+  </section>
+  <section class="day"><h2>Saturday · 🌈 Chueca + Malasaña + sunset</h2>
+    <div class="item"><div class="time">10:00</div><div><strong>Malasaña</strong><p>Breakfast, Plaza del Dos de Mayo and independent shops. Keep the vintage/bargain-hunting mission.</p></div></div>
+    <div class="item"><div class="time">13:00</div><div><strong>Lunch · Chueca</strong><p>Choose a mixed restaurant with genuine plant-based choices, rather than forcing your partner into an all-vegan meal. LaLina Chueca is one possible fit.</p></div></div>
+    <div class="item"><div class="time">14:30</div><div><strong>🌈 Chueca → Salesas</strong><p>Walk Plaza de Chueca, Calle Pelayo, Gravina and Libertad. Enjoy the LGBTQ+ atmosphere without needing to club.</p></div></div>
+    <div class="item"><div class="time">17:00</div><div><strong>🍷 Wine · Chueca</strong><p>Try a small wine bar such as Baco y Beto, prioritising natural/small-production wines.</p></div></div>
+    <div class="item"><div class="time">19:30</div><div><strong>🌅 Temple of Debod</strong><p>Head over for sunset — one of the strongest visual moments of the trip.</p></div></div>
+    <div class="item"><div class="time">21:00</div><div><strong>Queer-friendly evening</strong><div class="choice"><b>Relaxed</b> · La Mae / small local-feeling bar.</div><div class="choice"><b>Chueca drinks</b> · Casual cocktails and people-watching.</div><div class="choice"><b>Nightlife</b> · Long Play if you actually want a club night.</div></div></div>
+  </section>
+  <section class="day"><h2>Sunday · 🧺 Local Madrid + food experience</h2>
+    <div class="item"><div class="time">10:00</div><div><strong>El Rastro</strong><p>Go early and explore beyond the busiest main stretch for vintage and bargains.</p></div></div>
+    <div class="item"><div class="time">12:30</div><div><strong>La Latina + market</strong><p>Browse Mercado de la Cebada and graze on interesting foods.</p></div></div>
+    <div class="item"><div class="time">14:00</div><div><strong>Mixed or vegan-friendly lunch</strong><p>You now have flexibility: choose a genuinely good mixed restaurant if it has safe egg-free plant options, or use a vegan anchor.</p></div></div>
+    <div class="item"><div class="time">15:30</div><div><strong>Siesta</strong><p>Don't skip it.</p></div></div>
+    <div class="item"><div class="time">18:00</div><div><strong>🌸 Special food experience</strong><div class="choice"><b>Pipilacha</b> · Best balance of unusual experience + intimate setting. Confirm egg-free requirements in advance.</div><div class="choice"><b>El Invernadero</b> · Splurge option with a vegan tasting menu.</div></div></div>
+    <div class="item"><div class="time">21:00</div><div><strong>Wine / relaxed night</strong><p>Keep Sunday evening social but not exhausting.</p></div></div>
+  </section>
+  <section class="day"><h2>Monday · Classic Madrid + final favourites</h2>
+    <div class="item"><div class="time">09:30</div><div><strong>Breakfast</strong><p>Slow start.</p></div></div>
+    <div class="item"><div class="time">10:30</div><div><strong>Royal Palace → Sabatini Gardens</strong><p>Classic Madrid without sacrificing the relaxed pace.</p></div></div>
+    <div class="item"><div class="time">13:30</div><div><strong>Final lunch</strong><p>Pick a mixed restaurant with strong vegan/egg-free choices or return to your favourite vegan spot.</p></div></div>
+    <div class="item"><div class="time">15:00</div><div><strong>Last wander</strong><p>Choose Chueca/Salesas for one final coffee and shops, or Lavapiés for a last dose of alternative Madrid.</p></div></div>
+  </section>
+  <div class="note"><b>Best for:</b> you two having the same trip rather than one person eating vegan by default — while making LGBTQ+ friendliness, Chueca/Salesas, natural wine and mixed restaurants part of the experience. Your egg intolerance stays a hard constraint.</div>
+</div>
+</main>
+
+<footer>Madrid weekend planner · Option 2 is the recommended starting point if you want more variety without giving up vegan-friendly and egg-free options.</footer>
+
+<script>
+function showPlan(plan){
+  document.getElementById('plan-one').classList.toggle('hidden', plan !== 'one');
+  document.getElementById('plan-two').classList.toggle('hidden', plan !== 'two');
+  document.getElementById('one').classList.toggle('active', plan === 'one');
+  document.getElementById('two').classList.toggle('active', plan === 'two');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

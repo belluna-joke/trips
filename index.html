@@ -3,143 +3,285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Madrid Weekend — Geo-Optimized Pocket Navigator</title>
+<title>Madrid Travel Guide · Pocket Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f4ef;
-    --card: #ffffff;
-    --ink: #1f1c19;
-    --muted: #6e675f;
-    --accent: #8b4d6b;
-    --accent2: #2a6b52;
-    --line: #e5decf;
-    --pill-bg: #efe8df;
+    --bg-canvas: #faf9f6;
+    --card-bg: #ffffff;
+    --text-primary: #121212;
+    --text-muted: #666666;
+    --border-subtle: #e8e6e1;
+    --accent-dark: #121212;
+    --accent-pill: #f0eee9;
+    --accent-pill-hover: #e5e2da;
+    --tag-vegan-bg: #e8f5e9;
+    --tag-vegan-text: #2e7d32;
+    --tag-gay-bg: #fce4ec;
+    --tag-gay-text: #c2185b;
+    --tag-logistics-bg: #e3f2fd;
+    --tag-logistics-text: #1565c0;
+    --shadow-sm: 0 2px 10px rgba(0,0,0,0.03);
+    --shadow-md: 0 10px 30px rgba(0,0,0,0.05);
+    --radius-card: 20px;
+    --radius-pill: 999px;
   }
+
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.45;
-    padding-bottom: 40px;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 60px;
   }
+
+  /* Squarespace Minimalist Hero Header */
   header {
-    padding: 20px 16px 14px;
-    background: linear-gradient(135deg, #f0e2d5, #f7f4ef 60%, #e2eee6);
-    border-bottom: 1px solid var(--line);
+    padding: 48px 24px 28px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-subtle);
+    text-align: center;
   }
-  h1 { margin: 0 0 4px; font-size: 1.6rem; letter-spacing: -.03em; }
-  header p { margin: 0; color: var(--muted); font-size: 0.85rem; }
-  
+  .header-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+  }
+  h1 em { font-style: italic; font-weight: 400; }
+  header p {
+    margin: 0 auto;
+    max-width: 520px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    font-weight: 400;
+  }
+
+  /* Sticky Controls Bar - Glassmorphism */
   .controls {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(247, 244, 239, 0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-    padding: 10px 16px;
+    background: rgba(250, 249, 246, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 12px 20px;
   }
-  .switch-wrapper { display: flex; gap: 6px; margin-bottom: 8px; }
+  .switch-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .plan-btn {
     flex: 1;
-    border: 1px solid #dcd4c8;
-    background: var(--card);
-    color: var(--ink);
-    padding: 8px 12px;
-    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
     font-weight: 600;
     font-size: 0.82rem;
+    letter-spacing: -0.01em;
+    transition: all 0.2s ease;
   }
-  .plan-btn.active { background: var(--ink); color: white; border-color: var(--ink); }
-  
-  .filter-bar { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+  .plan-btn.active {
+    background: var(--accent-dark);
+    color: #ffffff;
+    border-color: var(--accent-dark);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .filter-bar::-webkit-scrollbar { display: none; }
   .filter-tag {
-    border: 1px solid #d6ceb8;
-    background: var(--pill-bg);
-    color: var(--ink);
-    padding: 5px 12px;
-    border-radius: 999px;
+    border: 1px solid transparent;
+    background: var(--accent-pill);
+    color: var(--text-primary);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
     font-size: 0.78rem;
     font-weight: 600;
     white-space: nowrap;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
-  .filter-tag.active { background: var(--accent2); color: white; border-color: var(--accent2); }
+  .filter-tag:hover { background: var(--accent-pill-hover); }
+  .filter-tag.active {
+    background: var(--accent-dark);
+    color: #ffffff;
+  }
 
-  main { max-width: 760px; margin: auto; padding: 16px; }
+  main { max-width: 760px; margin: auto; padding: 24px 16px; }
 
+  /* Dark Luxury GPS Card */
   .gps-card {
-    background: #111827;
-    color: #f9fafb;
-    border-radius: 16px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
+    background: var(--accent-dark);
+    color: #ffffff;
+    border-radius: var(--radius-card);
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
   }
-  .gps-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .gps-title { font-weight: 700; font-size: 0.88rem; }
+  .gps-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .gps-title { font-weight: 600; font-size: 0.9rem; letter-spacing: -0.01em; }
   .gps-btn {
-    background: #2563eb;
-    color: white;
+    background: #ffffff;
+    color: var(--accent-dark);
     border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
     font-size: 0.78rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    transition: opacity 0.2s ease;
   }
-  .gps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; font-size: 0.78rem; }
-  .gps-item { background: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 8px; }
-  .gps-item span { display: block; color: #9ca3af; font-size: 0.7rem; }
+  .gps-btn:hover { opacity: 0.9; }
+  .gps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+  .gps-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+  .gps-item span { display: block; color: #a1a1a1; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .gps-item strong { display: block; margin-top: 2px; font-size: 1rem; font-weight: 600; }
 
+  /* Summary Card */
   .summary-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
-    font-size: 0.82rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-card);
+    padding: 20px;
+    margin-bottom: 24px;
+    font-size: 0.85rem;
+    box-shadow: var(--shadow-sm);
   }
+  .summary-card strong { color: var(--text-primary); font-weight: 700; }
+  .summary-card ul { margin: 8px 0 0; padding-left: 18px; color: var(--text-muted); }
+  .summary-card li { margin-bottom: 4px; }
 
+  /* Day Section - Squarespace Clean Card */
   .day {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 16px;
-    margin-bottom: 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
   }
-  .day h2 { margin: 0 0 12px; font-size: 1.1rem; border-bottom: 2px solid var(--bg); padding-bottom: 8px; }
+  .day h2 {
+    margin: 0 0 16px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 12px;
+  }
 
-  .item { display: grid; grid-template-columns: 55px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+  .item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
   .item:first-of-type { border-top: none; }
-  .time { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
-  .item-content strong { display: block; font-size: 0.92rem; margin-bottom: 2px; }
-  .item-content p { margin: 0 0 6px; color: var(--muted); font-size: 0.82rem; }
+  .time {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: -0.02em;
+  }
+  .item-content strong {
+    display: block;
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+  }
+  .item-content p {
+    margin: 0 0 8px;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    font-weight: 400;
+  }
 
-  .item-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
-  .mini-tag { font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; background: #f0f0f0; color: #444; font-weight: 600; }
-  .mini-tag.vegan { background: #dcfce7; color: #15803d; }
-  .mini-tag.gay { background: #fce7f3; color: #be185d; }
-  .mini-tag.hotel { background: #e0f2fe; color: #0369a1; }
-  .mini-tag.flight { background: #fef3c7; color: #b45309; }
-  .mini-tag.concert { background: #f3e8ff; color: #6b21a8; }
-  .mini-tag.geo { background: #e0e7ff; color: #3730a3; }
+  .item-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+  .mini-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-pill);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .mini-tag.vegan { background: var(--tag-vegan-bg); color: var(--tag-vegan-text); }
+  .mini-tag.gay { background: var(--tag-gay-bg); color: var(--tag-gay-text); }
+  .mini-tag.hotel, .mini-tag.flight { background: var(--tag-logistics-bg); color: var(--tag-logistics-text); }
+  .mini-tag.geo { background: #f3e8ff; color: #6b21a8; }
 
-  .map-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: #2563eb; text-decoration: none; font-weight: 600; }
-  .choice-box { border: 1px dashed #cbbdaf; border-radius: 10px; padding: 10px; margin-top: 6px; background: #faf8f5; font-size: 0.82rem; }
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid var(--text-primary);
+    padding-bottom: 1px;
+    transition: opacity 0.2s;
+  }
+  .map-link:hover { opacity: 0.6; }
+
+  .choice-box {
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top: 8px;
+    background: var(--bg-canvas);
+    font-size: 0.84rem;
+  }
 
   .hidden { display: none !important; }
-  footer { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 20px; }
+  footer { text-align: center; color: var(--text-muted); font-size: 0.82rem; padding: 30px 20px; font-weight: 500; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Madrid Pocket Navigator 🇪🇸</h1>
-  <p>Geo-grouped itinerary designed to minimize travel time.</p>
+  <span class="header-badge">Madrid Weekend Guide</span>
+  <h1>Pocket <em>Navigator</em></h1>
+  <p>Geo-grouped itinerary with real-time location metrics & quick filters.</p>
 </header>
 
 <div class="controls">
@@ -160,8 +302,8 @@
 
   <section class="gps-card">
     <div class="gps-header">
-      <div class="gps-title">📍 Live Distance Calculator</div>
-      <button class="gps-btn" onclick="calculateDistances()">Get My Location</button>
+      <div class="gps-title">📍 Live Pocket Distance Meter</div>
+      <button class="gps-btn" onclick="calculateDistances()">Locate Me</button>
     </div>
     <div class="gps-grid">
       <div class="gps-item"><span>The 143 (Hotel 1)</span><strong id="dist-h1">-- km</strong></div>
@@ -172,38 +314,38 @@
   </section>
 
   <section class="summary-card">
-    <strong>✈️ Flight & Hotel Specs:</strong>
-    <ul style="margin: 4px 0 0; padding-left: 18px; line-height: 1.4;">
-      <li><b>Out:</b> Fri 18 Sep • DUB 08:00 → MAD 11:30 (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
-      <li><b>Back:</b> Mon 21 Sep • MAD 19:25 → DUB (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
-      <li><b>Hotel 1 (Fri):</b> The 143 (Carabanchel / Abrantes)</li>
-      <li><b>Hotel 2 (Sat-Mon):</b> Canopy Hilton Castellana</li>
+    <strong>⚡ Core Trip Logistics</strong>
+    <ul>
+      <li><b>Outbound:</b> Fri 18 Sep • DUB 08:00 → MAD 11:30 (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
+      <li><b>Inbound:</b> Mon 21 Sep • MAD 19:25 → DUB (PNR: <code>U7B1WD</code> / <code>W8R1SN</code>)</li>
+      <li><b>Hotel 1 (Fri):</b> The 143 (Avenida de Abrantes 143)</li>
+      <li><b>Hotel 2 (Sat-Mon):</b> Canopy by Hilton Madrid Castellana</li>
     </ul>
   </section>
 
   <div id="itinerary">
 
-    <!-- FRIDAY: SOUTH ZONE ONLY -->
+    <!-- FRIDAY -->
     <section class="day">
-      <h2>Friday 18 Sep · South Zone (Hotel 1, Madrid Río & Shakira)</h2>
+      <h2>Friday 18 Sep · South Zone & Concert</h2>
       
       <div class="item" data-tags="logistics flight">
         <div class="time">11:30</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag flight">Flight</span></span>
           <strong>Landing at Madrid Barajas (MAD)</strong>
-          <p>Grab luggage and take Taxi/Metro Line 8 straight to south Madrid.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adolfo+Su%C3%A1rez+Madrid%E2%80%93Barajas+Airport">📍 Map Airport</a>
+          <p>Collect bags and travel straight to south Madrid via Taxi or Metro line 8.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adolfo+Su%C3%A1rez+Madrid%E2%80%93Barajas+Airport">Directions →</a>
         </div>
       </div>
 
       <div class="item" data-tags="logistics hotel">
         <div class="time">12:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag hotel">Hotel 1</span><span class="mini-tag geo">South</span></span>
+          <span class="item-tags"><span class="mini-tag hotel">Hotel 1</span><span class="mini-tag geo">South Hub</span></span>
           <strong>Drop Bags @ The 143</strong>
-          <p>Avenida de Abrantes 143. Drop bags before heading to nearby lunch.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Avenida+de+Abrantes+143+Madrid">📍 Open Hotel Map</a>
+          <p>Avenida de Abrantes 143 (Carabanchel area). Check-in starts at 14:00.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Avenida+de+Abrantes+143+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -212,18 +354,18 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag vegan">100% Vegan</span><span class="mini-tag geo">Near Hotel</span></span>
           <strong>Lunch · Doxa Plant Based or Bite Me Café</strong>
-          <p>Stay local to Abrantes/Usera. Doxa offers 100% vegan meals in Carabanchel, or grab savory bagels at Bite Me near Matadero.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Doxa+Plant+Based+Calle+del+Marqu%C3%A9s+de+Jura+Real+22+Madrid">📍 Map Doxa (Near Hotel)</a>
+          <p>Keep lunch close to your hotel. Doxa offers plant-based food in Carabanchel, or grab savory bagels at Bite Me near Matadero.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Doxa+Plant+Based+Calle+del+Marqu%C3%A9s+de+Jura+Real+22+Madrid">Directions →</a>
         </div>
       </div>
 
       <div class="item" data-tags="wine food">
         <div class="time">16:00</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Culture</span><span class="mini-tag geo">South</span></span>
-          <strong>Matadero Madrid & Mercado de San Fernando</strong>
-          <p>Stroll the Madrid Río riverside cultural complex without hitting heavy city center traffic.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Matadero+Madrid">📍 Map Matadero</a>
+          <span class="item-tags"><span class="mini-tag">Culture</span><span class="mini-tag geo">South Hub</span></span>
+          <strong>Matadero Madrid & Riverside Walk</strong>
+          <p>Stroll through the converted arts complex along Madrid Río without crossing into city traffic.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Matadero+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -232,23 +374,23 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag concert">Concert</span><span class="mini-tag geo">South Hub</span></span>
           <strong>💃 SHAKIRA Live @ Iberdrola Music</strong>
-          <p>Direct ~15 min trip straight down from Abrantes to Villaverde gates.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Iberdrola+Music+Villaverde+Madrid">📍 Map Iberdrola Music</a>
+          <p>Direct ~15 min trip straight down from your hotel area to the Villaverde venue.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Iberdrola+Music+Villaverde+Madrid">Directions →</a>
         </div>
       </div>
     </section>
 
-    <!-- SATURDAY: CENTRAL / NORTH ZONE -->
+    <!-- SATURDAY -->
     <section class="day">
-      <h2>Saturday 19 Sep · Hotel Switch + Malasaña, Chueca & Debod</h2>
+      <h2>Saturday 19 Sep · Central / North Axis</h2>
 
       <div class="item" data-tags="logistics hotel">
         <div class="time">09:30</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag hotel">Hotel 2</span><span class="mini-tag geo">Castellana</span></span>
           <strong>Move Bags → Canopy by Hilton Castellana</strong>
-          <p>Check into Hotel 2. You are now anchored in the central/north zone.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Canopy+by+Hilton+Madrid+Castellana">📍 Canopy Hilton Map</a>
+          <p>Transfer bags to Hotel 2. You are now anchored in the central/north zone.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Canopy+by+Hilton+Madrid+Castellana">Directions →</a>
         </div>
       </div>
 
@@ -256,9 +398,9 @@
         <div class="time">10:30</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag">Shops</span><span class="mini-tag geo">Central</span></span>
-          <strong>Malasaña Bargains & Vintage</strong>
-          <p>Plaza del Dos de Mayo, Calle Velarde, and independent vintage shops.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Plaza+del+Dos+de+Mayo+Madrid">📍 Malasaña Map</a>
+          <strong>Malasaña Bargains & Vintage Browsing</strong>
+          <p>Explore Plaza del Dos de Mayo, Calle Velarde, and surrounding independent stores.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Plaza+del+Dos+de+Mayo+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -267,8 +409,8 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag gay">Queer Hub</span><span class="mini-tag vegan">Adjacent</span></span>
           <strong>Lunch · Chueca (LaLina / Mad Mad Vegan)</strong>
-          <p>Walk directly from Malasaña across Fuencarral into Chueca for lunch.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chueca+Madrid+Restaurants">📍 Chueca Dining Map</a>
+          <p>Walk directly from Malasaña across Calle Fuencarral into Chueca for lunch.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chueca+Madrid+Restaurants">Directions →</a>
         </div>
       </div>
 
@@ -278,7 +420,7 @@
           <span class="item-tags"><span class="mini-tag vegan">100% Vegan</span></span>
           <strong>Lunch · Mad Mad Vegan (Pelayo)</strong>
           <p>100% plant-based comfort burgers right in central Chueca.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mad+Mad+Vegan+Pelayo+Madrid">📍 Map Mad Mad Vegan</a>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mad+Mad+Vegan+Pelayo+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -286,9 +428,9 @@
         <div class="time">15:00</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag gay">Salesas</span></span>
-          <strong>🌈 Salesas Walk & Wine at Baco y Beto</strong>
-          <p>Explore boutique streets (Pelayo, Gravina) and grab natural wine nearby.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Baco+y+Beto+Madrid">📍 Baco y Beto Map</a>
+          <strong>🌈 Salesas Stroll & Wine at Baco y Beto</strong>
+          <p>Walk Calle Pelayo and Gravina, then pause for small-production wine.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Baco+y+Beto+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -297,8 +439,8 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag">Sunset</span><span class="mini-tag geo">West Axis</span></span>
           <strong>🌅 Sunset at Temple of Debod</strong>
-          <p>Short stroll/metro west to the temple grounds for sunset views.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Temple+of+Debod+Madrid">📍 Temple of Debod Map</a>
+          <p>Head west to the temple grounds for panoramic views across the city skyline.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Temple+of+Debod+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -307,8 +449,8 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag gay">Nightlife</span></span>
           <strong>Chueca Evening Drinks / Long Play</strong>
-          <p>Head back to Chueca for cocktails, social bars, or dancing.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Plaza+de+Chueca+Madrid">📍 Plaza de Chueca Map</a>
+          <p>Return to Chueca for cocktails, social bars, or late dancing.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Plaza+de+Chueca+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -317,23 +459,23 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag vegan">100% Vegan</span></span>
           <strong>Dinner · VEGA Álamo</strong>
-          <p>Located right next to Debod/Noviciado area for easy walking after sunset.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=VEGA+Alamo+Madrid">📍 VEGA Alamo Map</a>
+          <p>Conveniently located near Debod for a short walk after sunset.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=VEGA+Alamo+Madrid">Directions →</a>
         </div>
       </div>
     </section>
 
-    <!-- SUNDAY: OLD MADRID / LA LATINA -->
+    <!-- SUNDAY -->
     <section class="day">
-      <h2>Sunday 20 Sep · El Rastro, La Latina & Fine Dining</h2>
+      <h2>Sunday 20 Sep · Old Madrid & Fine Dining</h2>
 
       <div class="item" data-tags="wine food">
         <div class="time">10:00</div>
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag">Market</span><span class="mini-tag geo">Old Town</span></span>
           <strong>El Rastro Flea Market</strong>
-          <p>Explore side streets around Ribera de Curtidores for antique finds.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=El+Rastro+Madrid">📍 El Rastro Location</a>
+          <p>Explore antiques and vintage finds along Ribera de Curtidores.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=El+Rastro+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -342,8 +484,8 @@
         <div class="item-content">
           <span class="item-tags"><span class="mini-tag vegan">Vegan</span><span class="mini-tag geo">Adjacent</span></span>
           <strong>Lunch · THUNDER Vegan La Latina</strong>
-          <p>Steps away from the flea market exit in the heart of La Latina.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=THUNDER+Vegan+La+Latina+Madrid">📍 Map THUNDER</a>
+          <p>Comfort food steps away from the market exit in La Latina.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=THUNDER+Vegan+La+Latina+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -353,25 +495,25 @@
           <span class="item-tags"><span class="mini-tag vegan">Egg-Free Safe</span></span>
           <strong>🌸 Special Culinary Experience</strong>
           <div class="choice-box">
-            <b>Option A · Pipilacha:</b> Intimate 16-seat flower tasting menu.<br>
+            <b>Option A · Pipilacha:</b> Intimate 16-seat botanical dining.<br>
             <b>Option B · El Invernadero:</b> Michelin-starred plant tasting menu.
           </div>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=El+Invernadero+Rodrigo+de+la+Calle+Madrid">📍 Map Fine Dining</a>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=El+Invernadero+Rodrigo+de+la+Calle+Madrid">Directions →</a>
         </div>
       </div>
     </section>
 
-    <!-- MONDAY: HISTORIC CENTER & EXIT -->
+    <!-- MONDAY -->
     <section class="day">
-      <h2>Monday 21 Sep · Historic Royal Hub & Departure</h2>
+      <h2>Monday 21 Sep · Historic Royal District & Departure</h2>
 
       <div class="item" data-tags="logistics">
         <div class="time">10:30</div>
         <div class="item-content">
-          <span class="item-tags"><span class="mini-tag">Sightseeing</span><span class="mini-tag geo">Opera Axis</span></span>
+          <span class="item-tags"><span class="mini-tag">Sightseeing</span><span class="mini-tag geo">Ópera Axis</span></span>
           <strong>Royal Palace of Madrid & Sabatini Gardens</strong>
-          <p>Stroll through the gardens and royal grounds before departure.</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+of+Madrid">📍 Royal Palace Map</a>
+          <p>Take a morning stroll through royal grounds before departure.</p>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Royal+Palace+of+Madrid">Directions →</a>
         </div>
       </div>
 
@@ -381,7 +523,7 @@
           <span class="item-tags"><span class="mini-tag flight">Flight</span></span>
           <strong>Direct Travel to Airport (MAD)</strong>
           <p>Flight leaves at <b>19:25</b> back to Dublin (DUB).</p>
-          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adolfo+Su%C3%A1rez+Madrid%E2%80%93Barajas+Airport">📍 Airport Map</a>
+          <a class="map-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adolfo+Su%C3%A1rez+Madrid%E2%80%93Barajas+Airport">Directions →</a>
         </div>
       </div>
 
@@ -390,7 +532,7 @@
   </div>
 </main>
 
-<footer>Madrid Geo-Optimized Pocket Navigator</footer>
+<footer>Madrid Pocket Navigator</footer>
 
 <script>
 const LOCATIONS = {
@@ -412,7 +554,7 @@ function calculateDistances() {
     document.getElementById('dist-h2').innerText = getHaversineDistance(uLat, uLng, LOCATIONS.hotel2.lat, LOCATIONS.hotel2.lng) + " km";
     document.getElementById('dist-concert').innerText = getHaversineDistance(uLat, uLng, LOCATIONS.concert.lat, LOCATIONS.concert.lng) + " km";
     document.getElementById('dist-chueca').innerText = getHaversineDistance(uLat, uLng, LOCATIONS.chueca.lat, LOCATIONS.chueca.lng) + " km";
-  }, () => { alert("Unable to access GPS location."); });
+  }, () => { alert("Unable to access location."); });
 }
 
 function getHaversineDistance(lat1, lon1, lat2, lon2) {
